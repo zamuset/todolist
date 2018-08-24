@@ -1,0 +1,56 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/polymer/lib/elements/dom-repeat.html">
+<dom-module id="task-list">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      .container {
+        display: block;
+        padding: 5px;
+      }
+    </style>
+    <template is="dom-repeat" items="{{tasks}}">
+      <div class="container">
+        <input id="taskCheck" type="checkbox" on-change="_checkTask">
+        <label id="taskName">[[item.title]]</label>
+        <br>
+      </div>
+    </template>
+  </template>
+  <script>
+    class TaskList extends Polymer.Element {
+      static get is() {
+        return "task-list"
+      }
+      static properties() {
+        return {
+          tasks: {
+            type: Array
+          },
+          filter: {
+            type: String,
+            value: ""
+          }
+        }
+      }
+
+      _newTask(event) {
+        console.log("_newTask", event.model)
+        console.log("_newTask", event.detail)
+      }
+      _checkTask(event) {
+        console.log(event)
+        this.$.taskCheck.disabled = true
+      }
+      _filterTask(event) {
+        return tasks.array.forEach(element => {
+          
+        });
+      }
+    }
+    customElements.define(TaskList.is, TaskList)
+  </script>
+</dom-module>

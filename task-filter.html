@@ -1,0 +1,36 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<dom-module id="task-filter">
+  <template>
+    <style>
+      :host {
+        display: block;
+        padding: 10px;
+      }
+    </style>
+    <input type="text" placeholder="Filtro" on-input="_changeFilter">
+  </template>
+  <script>
+    class TaskFilter extends Polymer.Element {
+      static get is() {
+        return "task-filter"
+      }
+      static properties () {
+        return {
+          filter: {
+            type: String,
+            value: ""
+          }
+        }
+      }
+      _changeFilter(event){
+        this.filter = event.target.value
+        const filterChange = new CustomEvent('filter-change', {
+          detail: event.target.value
+        })
+        console.log("customEvent", this.filter)
+        this.dispatchEvent(filterChange)
+      }
+    }
+    customElements.define(TaskFilter.is, TaskFilter)
+  </script>
+</dom-module>
